@@ -4,6 +4,8 @@ var async = require('async');
 module.exports = (function() {
   var handlers = {};
   return {
+      
+      handlers: handlers,
 
       add: function(key, fn) {
 
@@ -30,6 +32,8 @@ module.exports = (function() {
        * @param  {Function} cb      [description]
        * @return {}         err     [description]
        */
+      
+      // TODO: change more to real pub/sub pattern with emit/on methods
       exec: function(client, arr, options, cb) {
         var appliedHandlers = [];
 
