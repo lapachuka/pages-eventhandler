@@ -31,7 +31,7 @@ module.exports = (function() {
        * @return {}         err     [description]
        */
       exec: function(client, arr, options, cb) {
-        var appliedHandlers = {};
+        var appliedHandlers = [];
 
         if (!_.isArray(arr))
           return cb(new Error('First argument should be an array'));
