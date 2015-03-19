@@ -39,9 +39,10 @@ module.exports = (function() {
         if (!_.isObject(options))
           return cb(new Error('Second argument should be an object'));
 
+        // FIX: events are not triggered somehow
         _.each(arr, function(val) {
-          if (val && handlers[val]) {
-            appliedHandlers.push(handlers[val]);
+          if (val && handlers[client][val]) {
+            appliedHandlers.push(handlers[client][val]);
           }
         });
 

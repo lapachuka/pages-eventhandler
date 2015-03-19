@@ -1,6 +1,6 @@
 {
   "name": "pages-events",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "async": "~0.9.0",
     "underscore": "~1.6.0"
