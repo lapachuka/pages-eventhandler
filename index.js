@@ -1,14 +1,13 @@
 var _ = require('underscore');
 var async = require('async');
 
-module.exports = (function() {
+var handler = (function() {
   var handlers = {};
   return {
       
       handlers: handlers,
 
       add: function(key, fn) {
-
         if (!_.isString(key))
           return new Error('First argument should be an string');
 
@@ -18,9 +17,8 @@ module.exports = (function() {
         var keys = (key.split('.').length > 1)
           ? key.split('.') : key;
 
-        // TODO: implement fn to dynamicly create nested objects based
-        handlers[keys[0]] = {};
-        handlers[keys[0]][keys[1]] = fn;
+        handlers = createdNestedProperties(handlers, keys, fn);
+
       },
 
       /**
@@ -57,3 +55,21 @@ module.exports = (function() {
       }
   };
 })();
+
+function createdNestedProperties(obj, arr, fn) {
+  var lastIndex = arr.pop();
+  var previous;
+
+  for (var i = 0; arr.length > i; i++) {
+    var key = arr[i];
+    if (!obj[key]) {
+      obj[key] = {};
+    }
+    previous = obj[key];
+  }
+
+  previous[lastIndex] = fn;
+  return obj;
+}
+
+module.exports = handler;
